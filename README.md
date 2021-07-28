@@ -94,5 +94,61 @@
  ![image](https://user-images.githubusercontent.com/85843030/127341071-158b77dd-39cc-40dc-95d9-23fe1590d267.png)
 
  
+    Next we need to create a multiple line plot that shows the total weekly of the fares for each type of city:
+    # 1. Read the merged DataFrame
+    pyber_data_df.info()
+
+    # 2. Using groupby() to create a new DataFrame showing the sum of the fares for each date where the indices are the city type and date
+    fare_by_date_df= pyber_data_df.groupby(["type", "date"]).sum()[['fare']]
+    fare_by_date_df
+
+    # 3. Reset the index on the DataFrame you created in #1. This is needed to use the 'pivot()' function.
+    fare_by_date_df= fare_by_date_df.reset_index()
+    fare_by_date_df.info() 
     
+    # 4. Create a pivot table with the 'date' as the index, the columns ='type', and values='fare' to get the total fares for each type of city by the date. 
+    fare_by_date_df_pivot = fare_by_date_df.pivot(index="date", columns="type", values="fare")
+    fare_by_date_df_pivot.head(10)
+    
+    # 5. Create a new DataFrame from the pivot table DataFrame using loc on the given dates, '2019-01-01':'2019-04-29'.
+    fare_by_month= fare_by_date_df_pivot.loc['2019-01-01':'2019-04-29']
+    fare_by_month
+    
+    # 6. Set the "date" index to datetime datatype. This is necessary to use the resample() method in Step 8.
+    fare_by_month.index = pd.to_datetime(fare_by_month.index)
+    
+    # 7. Check that the datatype for the index is datetime using df.info()
+    fare_by_month.info()
+    
+    # 8. Create a new DataFrame using the "resample()" function by week 'W' and get the sum of the fares for each week. 
+    fare_by_month_df=fare_by_month.resample('w').sum()
+    fare_by_month_df
+    
+output 2.
+![image](https://user-images.githubusercontent.com/85843030/127343445-87e3ce03-a870-489a-967c-5adbe7c75441.png)
+
+    
+    
+    # 9. Using the object-oriented interface method, plot the resample DataFrame using the df.plot() function. 
+
+    # Import the style from Matplotlib.
+    from matplotlib import style
+
+    # Use the graph style fivethirtyeight.
+    style.use('fivethirtyeight')
+
+    montley_fares = fare_by_month_df.plot( figsize = (30,6))
+    montley_fares.set_xlabel("Month")
+    montley_fares.set_ylabel("Fare($USD)")
+
+    # Add a title 
+    montley_fares.set_title("Total Fare by City")
+    plt.savefig("Resources/PyBer_fare_summary.png")
+    plt.show()
+    
+  Output 3.
+  ![image](https://user-images.githubusercontent.com/85843030/127343583-5fb1e842-ae70-46bf-a509-67658b3cb6ee.png)
+
+  
+
     
