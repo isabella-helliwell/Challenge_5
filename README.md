@@ -150,5 +150,9 @@ output 2.
   ![image](https://user-images.githubusercontent.com/85843030/127343583-5fb1e842-ae70-46bf-a509-67658b3cb6ee.png)
 
   
+## 4. Results
 
+    Lokking at graph in output 3, it can be seen that the fares in the rural areas are far less than the fares in the urban city areas.
+    The graphs show quite a steady continious curves, where there are no massive peaks to suggest any abnormal behaviour in trend.
+    Overall, the fares in the urban city areas are much higher than those for rural.
     
