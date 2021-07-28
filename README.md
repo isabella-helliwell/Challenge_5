@@ -15,9 +15,84 @@
   ## 3. Analysis
   
   For the analysis. we need to get:
-  -The total number of rides, 
-  -Total number of drivers, 
-  -The total fares for each city type. 
+  - The total number of rides, 
+  - Total number of drivers, 
+  - The total fares for each city type. 
   Then, we need to calculate the follwing:
-  -Average fare per ride and average fare per driver for each city type. 
+  - Average fare per ride and average fare per driver for each city type. 
   The final stage is to add this data to a new DataFrame, and format the columns.
+
+### 3.1 Python code
+  The following python code is used:
+  First part is to load and read the csv.files and merge the two dataframes on their combined column "city"
+     # Add Matplotlib inline magic command
+    %matplotlib inline
+    # Dependencies and Setup
+    import matplotlib.pyplot as plt
+    import pandas as pd
+    import numpy as np
+
+    # File to Load (Remember to change these)
+    city_data_to_load = "city_data.csv"
+    ride_data_to_load = "ride_data.csv"
+
+    # Read the City and Ride Data
+    city_data_df = pd.read_csv(city_data_to_load)
+    ride_data_df = pd.read_csv(ride_data_to_load)
+
+    # Combine the data into a single dataset
+    pyber_data_df = pd.merge(ride_data_df, city_data_df, how="left", on=["city", "city"])
+
+    # Display the data table for preview
+    pyber_data_df.head()
+    
+    The next section is to carry out some analysis on the dataframe to get averages, sums and count and create a PyBer summary Dataframe and formatting:
+    #  1. Get the total rides for each city  
+    total_rides_per_city=pyber_data_df.groupby(["type"]).count()["ride_id"]
+  
+    # 2. Get the total drivers for each city type
+    total_drivers_per_city = city_data_df.groupby(["type"]).sum()["driver_count"]
+    
+    #  3. Get the total amount of fares for each city type
+    total_fares= pyber_data_df.groupby(["type"]).sum()["fare"] 
+    
+    #  4. Get the average fare per ride for each city type. 
+    average_fare_per_ride = pyber_data_df.groupby(["type"]).mean()["fare"]
+    
+    # 5. Get the average fare per driver for each city type. 
+    #sum of all the fares/total drivers
+    average_fare_per_driver= pyber_data_df.groupby(["type"]).sum()["fare"]/city_data_df.groupby(["type"]).sum()["driver_count"] 
+    
+    #  6. Create a PyBer summary DataFrame. 
+    # Create a DataFrame
+    pyber_summary_df= pd.DataFrame({
+              "Total Rides":total_rides_per_city, 
+              "Total Drivers": total_drivers_per_city, 
+              "Total Fares": total_fares,
+              "Average Fare per Ride": average_fare_per_ride, 
+              "Average Fare per Driver":average_fare_per_driver})
+    # Format the columns:
+    # Format the "Total Students" to have the comma for a thousands separator.
+    pyber_summary_df["Total Rides"] = pyber_summary_df["Total Rides"].map("{:,}".format)
+
+    # Format the "Total Budget" to have the comma for a thousands separator, a decimal separator and a "$".
+    pyber_summary_df["Total Drivers"] = pyber_summary_df["Total Drivers"].map("{:,}".format)
+    # Format the columns.
+    pyber_summary_df["Total Fares"] = pyber_summary_df["Total Fares"].map("${:,.2f}".format)
+    pyber_summary_df["Average Fare per Ride"] = pyber_summary_df["Average Fare per Ride"].map("${:.2f}".format)
+
+    pyber_summary_df["Average Fare per Driver"] = pyber_summary_df["Average Fare per Driver"].map("${:.2f}".format) 
+
+    # Display the data frame
+    pyber_summary_df
+    
+    We also need to clean up the summary by deleting the index name ("type"):
+    #  7. Cleaning up the DataFrame. Delete the index name
+    pyber_summary_df.index.name = None
+
+ output 1.
+ ![image](https://user-images.githubusercontent.com/85843030/127341071-158b77dd-39cc-40dc-95d9-23fe1590d267.png)
+
+ 
+    
+    
