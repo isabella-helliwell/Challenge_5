@@ -152,7 +152,23 @@ output 2.
   
 ## 4. Results
 
-    Lokking at graph in output 3, it can be seen that the fares in the rural areas are far less than the fares in the urban city areas.
+    Looking at graph in output 3, it can be seen that the fares in the rural areas are far less than the fares in the urban city areas.
     The graphs show quite a steady continious curves, where there are no massive peaks to suggest any abnormal behaviour in trend.
     Overall, the fares in the urban city areas are much higher than those for rural.
+    
+    Furthermore, output 1, shows that total rides is 13 times more in the urban areas than the rural, with total fares being alomst 10 times higher in urban city ares.
+    
+    The same table suggests that in the urban areas the average price per driver is much lower than in the rural areas, suggesting that the price of a taxi is higher in the         rural areas than the urban.
+    We can also see that there are 1.48 drivers available for every ride in the urban areas, compare to 0.78 in the suburbs and 0.6 in the rural areas, suggesting
+    that there might not be enough taxi drivers for the suburban and rural areas to del with the demands.
+    
+## 5. Recommendations
+  
+    Looking at the data in output1-3, my recommendation would be to decrease the price of the rides for the rural areas, and increase the driver counts. It is also worth
+    addressing the duration of the rides, since the price increase for the rural areas could be that the rides are longer, than the urban areas.
+    
+    
+   
+    
+    
     
