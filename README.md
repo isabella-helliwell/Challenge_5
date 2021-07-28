@@ -1,5 +1,5 @@
 # PyBer Analysis
-## 1.Scope of Project
+## 1. Scope of Project
 
   Create a summary of the ride-sharing data by city type during the period of Jan to April. 
   The city types are:
@@ -25,6 +25,7 @@
 ### 3.1 Python code
   The following python code is used:
   First part is to load and read the csv.files and merge the two dataframes on their combined column "city"
+  
      # Add Matplotlib inline magic command
     %matplotlib inline
     # Dependencies and Setup
